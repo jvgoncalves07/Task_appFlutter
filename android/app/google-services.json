@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "970448214217",
+    "project_id": "taskappflutter-bd40f",
+    "storage_bucket": "taskappflutter-bd40f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:970448214217:android:427a76874605f665829518",
+        "android_client_info": {
+          "package_name": "com.example.task_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "970448214217-2e6uvl3mi4k2b12g0d7rndaga1ai9k7f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD05ocJL_8sZ3Ovmo8u9SxEqBcVWEdCrSM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "970448214217-2e6uvl3mi4k2b12g0d7rndaga1ai9k7f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
