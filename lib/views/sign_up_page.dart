@@ -36,7 +36,7 @@ class _SignUpPageState extends State<SignUpPage>{
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 "Registro",
                style: TextStyle(
                  color: Colors.blue,
@@ -56,14 +56,14 @@ class _SignUpPageState extends State<SignUpPage>{
                       }else
                         return null;
                     },
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: "Nome",
                       labelStyle: TextStyle(
                         color: Colors.black,
                       )),
-                    style: TextStyle(color: Colors.black),
+                    style: const TextStyle(color: Colors.black),
                   ),
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
                   TextFormField(
                     controller: emailController,
                     validator: (value){
@@ -72,14 +72,14 @@ class _SignUpPageState extends State<SignUpPage>{
                       }else
                         return null;
                     },
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: "Email",
                       labelStyle: TextStyle(color: Colors.black)),
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.black,
                     ),
                   ),
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
                   TextFormField(
                     controller: passwordController,
                     validator: (value){
@@ -88,17 +88,18 @@ class _SignUpPageState extends State<SignUpPage>{
                       }else
                         return null;
                     },
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: "Senha",
                       labelStyle: TextStyle(color: Colors.black)),
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.black,
                     ),
                   ),
-                  SizedBox(height: 30),
+                  const SizedBox(height: 30),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
+                      // ignore: deprecated_member_use
                       FlatButton(
                         onPressed: () {
                         if (_key.currentState!.validate() ) {
@@ -108,6 +109,7 @@ class _SignUpPageState extends State<SignUpPage>{
                         child: Text('Registrar'),
                         color: Colors.blue,
                       ),
+                      // ignore: deprecated_member_use
                       FlatButton(
                         onPressed: () {
                           Navigator.pop(context);

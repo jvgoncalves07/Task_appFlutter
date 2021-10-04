@@ -1,19 +1,15 @@
-import 'dart:async';
 
-import 'package:cloud_firestore_web/cloud_firestore_web.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:provider/src/provider.dart';
 import 'package:task_app/authentication_service.dart';
-import 'package:task_app/database/database.dart';
-import 'package:task_app/models/task.dart';
 import 'package:task_app/views/sign_in_page.dart';
 
 
 class HomePage extends StatelessWidget {
   static String tag = '/home';
+
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +33,7 @@ class HomePage extends StatelessWidget {
                   );
               });
             },
-            child: Icon(
+            child: const Icon(
               Icons.exit_to_app,
               color: Colors.white,
             ),
@@ -82,15 +78,12 @@ class HomePage extends StatelessWidget {
                 child: ListTile(
                   isThreeLine: true,
                   leading: IconButton(
-                    icon: Icon(
-                      item['feito']
-                      ? Icons.check_circle 
-                      : Icons.radio_button_unchecked,
+                    icon: const Icon( 
+                      Icons.border_color,
                       size: 32,
                       ),
-                    onPressed: () => doc.reference.update({
-                      'feito': !item['feito'],
-                    }),
+                    onPressed: () => modalEdit(context, doc)
+                    
                     ),
                     title: Text("${item['titulo']}"),
                     subtitle: Text("${item['descricao']}"),
@@ -98,10 +91,11 @@ class HomePage extends StatelessWidget {
                       backgroundColor: Colors.red[300],
                       foregroundColor: Colors.white,
                       child: IconButton(
-                        icon: Icon(Icons.delete), 
+                        icon: const Icon(Icons.delete), 
                         onPressed: () => doc.reference.delete(),
                       ),
                     ),
+
                 ),
               );
             },
@@ -199,7 +193,7 @@ class HomePage extends StatelessWidget {
            );
   }
 
-  modalEdit(BuildContext context){
+  modalEdit(BuildContext context, QueryDocumentSnapshot<Object?> doc){
     var form = GlobalKey<FormState>();
     var titulo = TextEditingController();
     var descricao = TextEditingController();
@@ -229,7 +223,8 @@ class HomePage extends StatelessWidget {
                           if(value!.isEmpty){
                             return 'Este campo não pode ser vazio';
                           }
-                          return null;                      }
+                          return null;
+                        }
                       ),
                         SizedBox(height: 20,),
                         Text('Descrição'),
@@ -254,12 +249,9 @@ class HomePage extends StatelessWidget {
                 FlatButton(
                   onPressed: () async{
                     if(form.currentState!.validate()){
-                      await FirebaseFirestore.instance.collection('tasks').add({
+                      doc.reference.update({
                         'titulo': titulo.text,
                         'descricao': descricao.text,
-                        'data': Timestamp.now(),
-                        'feito': false,
-                        'excluido': false,
                       });
 
                       Navigator.of(context).pop();

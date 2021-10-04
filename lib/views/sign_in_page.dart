@@ -1,9 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:provider/src/provider.dart';
 import 'package:task_app/authentication_service.dart';
 import 'package:task_app/views/home_page.dart';
 import 'package:task_app/views/sign_up_page.dart';
@@ -21,6 +18,12 @@ class SignInPage extends StatefulWidget{
 
 class _SignInPageState extends State<SignInPage>{
   final _key = GlobalKey<FormState>();
+  late bool passwordVisible;
+
+  @override
+  void initState() {
+   passwordVisible = false;
+  }
 
   final AuthenticationService _auth = AuthenticationService();
 
@@ -38,7 +41,7 @@ class _SignInPageState extends State<SignInPage>{
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 "Task App",
                style: TextStyle(
                  color: Colors.blue,
@@ -59,15 +62,16 @@ class _SignInPageState extends State<SignInPage>{
                       }else
                         return null;
                     },
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: "Email",
                       labelStyle: TextStyle(color: Colors.black)),
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.black,
                     ),
                   ),
                   SizedBox(height: 30),
                   TextFormField(
+                    obscureText: true,
                     controller: passwordController,
                     validator: (value){
                       if(value!.isEmpty){
@@ -75,10 +79,10 @@ class _SignInPageState extends State<SignInPage>{
                       }else
                         return null;
                     },
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: "Senha",
                       labelStyle: TextStyle(color: Colors.black)),
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.black,
                     ),
                   ),
@@ -103,8 +107,9 @@ class _SignInPageState extends State<SignInPage>{
                               fullscreenDialog: true,
                               builder: (context) => SignUpPage())
                           );
+                          
                         }, 
-                        child: Text('Não é registrado? Registre-se'),
+                        child: const Text('Não é registrado? Registre-se'),
                         color: Colors.blue,
                         )
                     ],
@@ -122,24 +127,26 @@ class _SignInPageState extends State<SignInPage>{
   }
 
   void SignIn() async{
-    dynamic result = await _auth..signIn(emailController.text, passwordController.text);
-    
-    if(result==null){
+    String result = await _auth.signIn(emailController.text, passwordController.text) as String;
+    print(result);
+    if(result!="Signed in"){
       print("Login inválido");
+      emailController.clear();
+      passwordController.clear();
     }else{
       print(result.toString());
       emailController.clear();
       passwordController.clear();
-      Navigator.of(context).push(
-        CupertinoPageRoute(
-           fullscreenDialog: true,
-           builder: (context) => HomePage())
+      Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) =>
+            HomePage()), (Route<dynamic> route) => false
       );
     
     }
   }
 
-  // ignore: non_constant_identifier_names
-  
+  void changePasswordVisible(){
+    passwordVisible = !passwordVisible;
+  }
 }
 

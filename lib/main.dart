@@ -1,30 +1,24 @@
 // ignore_for_file: use_key_in_widget_constructors
 
-import 'dart:html';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cloud_firestore_web/cloud_firestore_web.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:task_app/authentication_service.dart';
-import 'package:task_app/lista_task.dart';
 import 'package:task_app/views/home_page.dart';
 import 'package:task_app/views/sign_in_page.dart';
-import 'package:task_app/views/sign_up_page.dart';
 
 
 void main() async {
 
-  runApp(MyApp());
+  runApp(const MyApp());
 
 }
 
 class MyApp extends StatelessWidget {
 
 
-   MyApp({Key? key}) : super(key: key);
+   const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +37,7 @@ class MyApp extends StatelessWidget {
       ),
       home:  SignInPage(),
       routes: {
-        HomePage.tag: (context) => HomePage(),
+        HomePage.tag: (context) => const HomePage(),
       },
     ),
     );
@@ -58,7 +52,7 @@ class AuthenticationWrapper extends StatelessWidget {
     final firebaseUser = context.watch<User?>();
     
     if(firebaseUser != null){
-      return HomePage();
+      return const HomePage();
     }
     return SignInPage();
   }
