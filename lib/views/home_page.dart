@@ -117,14 +117,7 @@ class HomePage extends StatelessWidget {
         tooltip: 'Adicionar nova tarefa',
         child: const Icon(Icons.add),
       ),
-    
-    
-      // ignore: deprecated_member_use
-      
-    
-
-            
-      );
+    );
     
   }
 
