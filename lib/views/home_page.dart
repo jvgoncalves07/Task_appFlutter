@@ -85,7 +85,7 @@ class HomePage extends StatelessWidget {
                       Icons.border_color,
                       size: 32,
                       ),
-                    onPressed: () => modalEdit(context, doc)
+                    onPressed: () => editTask(context, doc)
                     
                     ),
                     title: Text("${item['titulo']}"),
@@ -129,7 +129,7 @@ class HomePage extends StatelessWidget {
   }
 
   
-  modalEdit(BuildContext context, QueryDocumentSnapshot<Object?> doc){
+  editTask(BuildContext context, QueryDocumentSnapshot<Object?> doc){
     var form = GlobalKey<FormState>();
     var titulo = TextEditingController();
     var descricao = TextEditingController();
